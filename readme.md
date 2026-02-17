@@ -243,6 +243,15 @@ Some SSL certificates like those signed by Let's Encrypt require ACME validation
 6. **Advanced Settings Tab**
    - Leave as is.
 
+**Note**
+
+Synology’s built-in reverse proxy does not correctly support WebSocket connections when the client negotiates HTTP/2. Some clients (including the AudioBooth mobile app) may fail when the server advertises HTTP/2. This can appear as streaming working initially and then failing to initialize the player until you log out and back in.
+
+If you encounter this behavior, disable HTTP/2 for the Audiobookshelf host under:
+`Control Panel → Network → Connectivity → Enable HTTP/2`
+
+Alternatively, disable Synology’s reverse proxy entirely and use a dedicated reverse-proxy container that properly supports WebSockets.
+
 ### [Traefik Reverse Proxy](https://doc.traefik.io/traefik/)
 
 Middleware relating to CORS will cause the app to report Unknown Error when logging in. To prevent this don't apply any of the following headers to the router for this site:
